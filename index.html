@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rise Frame</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="one">
+            <div class="imgBox">
+                <img src="ballonPng.png" alt="ballonPng" onclick="afterClick(0)">
+            </div>
+        </div>
+        <div class="two">
+            <div class="imgBox">
+                <img src="ballonPng.png" alt="ballonPng" onclick="afterClick(1)">
+            </div>
+        </div>
+        <div class="three">
+            <div class="imgBox">
+                <img src="ballonPng.png" alt="ballonPng" onclick="afterClick(2)">
+            </div>
+        </div>
+        <div class="four">
+            <div class="imgBox">
+                <img src="ballonPng.png" alt="ballonPng" onclick="afterClick(3)">
+            </div>
+        </div>
+        <div class="five">
+            <div class="imgBox">
+                <img src="ballonPng.png" alt="ballonPng" onclick="afterClick(4)">
+            </div>
+        </div>
+        <div class="five">
+            <div class="imgBox">
+                <img src="ballonPng.png" alt="ballonPng" onclick="afterClick(5)">
+            </div>
+        </div>
+        <div class="scoreframe">
+            Score: <span id="score">0</span>
+        </div>
+        <div class="popup">
+            <img src="success.png" width="100%" alt="success">
+        </div>
+    </div>
+</body>
+<script>
+
+    const height = window.innerHeight;
+    const width = window.innerWidth;
+
+    let div = document.getElementsByClassName("one")[0];
+    let imgBox = document.getElementsByClassName("imgBox");
+    let fimg = document.getElementsByTagName("img");
+    let popUp = document.getElementsByClassName("popup")[0];
+    popUp.style.visibility = "hidden";
+
+    let scorePoints = document.getElementById("score");
+    let liveScore = 0;
+    scorePoints.innerHTML = liveScore;
+
+    function showPopup() {
+        popUp.style.visibility = "visible";
+        var audio = new Audio('successMp3.mp3');
+        audio.play();
+    }
+
+    let c0 = -height - 1200;
+    function loop0() {
+        if (c0 == 0) {
+            c0 = -height - 200;
+        } else {
+            c0++;
+            imgBox[0].style.marginBottom = height + c0 + 'px';
+        }
+    }
+    let c1 = -height - 500;
+    function loop1() {
+        if (c1 == 0) {
+            c1 = -height - 200;
+        } else {
+            c1++;
+            imgBox[1].style.marginBottom = height + c1 + 'px';
+        }
+    }
+    let c2 = -height - 1000;
+    function loop2() {
+        if (c2 == 0) {
+            c2 = -height - 200;
+        } else {
+            c2++;
+            imgBox[2].style.marginBottom = height + c2 + 'px';
+        }
+    }
+    let c3 = -height - 400;
+    function loop3() {
+        if (c3 == 0) {
+            c3 = -height - 200;
+        } else {
+            c3++;
+            imgBox[3].style.marginBottom = height + c3 + 'px';
+        }
+    }
+    let c4 = -height - 300;
+    function loop4() {
+        if (c4 == 0) {
+            c4 = -height - 200;
+        } else {
+            c4++;
+            imgBox[4].style.marginBottom = height + c4 + 'px';
+        }
+    }
+    let c5 = -height - 700;
+    function loop5() {
+        if (c5 == 0) {
+            c5 = -height - 200;
+        } else {
+            c5++;
+            imgBox[5].style.marginBottom = height + c5 + 'px';
+        }
+    }
+
+
+    setInterval(loop0, 1)
+    setInterval(loop1, 3)
+    setInterval(loop2, 2)
+    setInterval(loop3, 4)
+    setInterval(loop4, 2)
+    setInterval(loop5, 3)
+
+    function afterClick(index) {
+        let nImg = document.createElement("img");
+        nImg.src = "ballonGif.gif"
+        nImg.alt = "Gif ballon"
+        var audio = new Audio('ballonBlast.mp3');
+        audio.play();
+        console.log(imgBox[1].childNodes[1]);
+        imgBox[index].replaceChild(nImg, fimg[index]);
+        setTimeout(divisible, 600, index);
+        liveScore += 10;
+        scorePoints.innerHTML = liveScore;
+        if (liveScore === 60) {
+            setTimeout(showPopup, 2000)
+        }
+    }
+
+    function divisible(index) {
+        fimg[index].style.opacity = 0;
+    }
+
+</script>
+
+</html>
